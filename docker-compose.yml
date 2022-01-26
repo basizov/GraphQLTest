@@ -1,0 +1,21 @@
+version: '3'
+services:
+  postgresql:
+    container_name: postgres_service
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    restart: unless-stopped
+  commandergql:
+    container_name: commandergql_service
+    depends_on:
+      - postgresql
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      ASPNETCORE_URLS: "http://+"
+      ASPNETCORE_ENVIRONMENT: "Development"
