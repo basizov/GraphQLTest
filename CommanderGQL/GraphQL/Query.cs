@@ -1,9 +1,18 @@
 ﻿using CommanderGQL.Data;
-using CommanderGQL.Data.Entities;
 
 namespace CommanderGQL.GraphQL;
 
 public class Query
 {
-	public IQueryable<Platform> GetPlatforms([Service] DataContext context) => context.Platforms;
+	[UseDbContext(typeof(DataContext))]
+	[UseProjection]
+	[UseFiltering]
+	[UseSorting]
+	public IQueryable<Data.Entities.Platform> GetPlatforms([ScopedService] DataContext context) => context.Platforms;
+
+	[UseDbContext(typeof(DataContext))]
+	[UseProjection]
+	[UseFiltering]
+	[UseSorting]
+	public IQueryable<Data.Entities.Command> GetCommands([ScopedService] DataContext context) => context.Commands;
 }
