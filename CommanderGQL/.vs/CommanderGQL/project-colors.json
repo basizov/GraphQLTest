@@ -10,7 +10,12 @@
       "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
       "DisplayName": "Miscellaneous Files",
       "ColorIndex": -1
+    },
+    "906659fe-4010-41e2-be32-321c15708cf9": {
+      "ProjectGuid": "906659fe-4010-41e2-be32-321c15708cf9",
+      "DisplayName": "CommanderGQL",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

@@ -4,6 +4,7 @@ using CommanderGQL.GraphQL.Command;
 using CommanderGQL.GraphQL.Platform;
 using GraphQL.Server.Ui.Voyager;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +16,17 @@ builder.Services.AddGraphQLServer()
 	.AddQueryType<Query>()
 	.AddMutationType<Mutation>()
 	.AddSubscriptionType<Subscription>()
+	.AddRedisSubscriptions(_ =>
+		ConnectionMultiplexer.Connect(new ConfigurationOptions
+		{
+			EndPoints = { "localhost:6379" }
+		})
+	)
 	.AddType<PlatformType>()
 	.AddType<CommandType>()
 	.AddFiltering()
 	.AddSorting()
-	.AddProjections()
-	.AddInMemorySubscriptions();
+	.AddProjections();
 
 var app = builder.Build();
 
