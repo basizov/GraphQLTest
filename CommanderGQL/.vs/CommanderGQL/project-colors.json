@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "61c00b7c-db08-42e6-bbaf-72f7b9d4f413": {
+      "ProjectGuid": "61c00b7c-db08-42e6-bbaf-72f7b9d4f413",
+      "DisplayName": "CommanderGQL",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}

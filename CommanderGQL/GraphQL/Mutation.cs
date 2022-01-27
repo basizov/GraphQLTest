@@ -1,13 +1,19 @@
 ﻿using CommanderGQL.Data;
 using CommanderGQL.GraphQL.Command;
 using CommanderGQL.GraphQL.Platform;
+using HotChocolate.Subscriptions;
 
 namespace CommanderGQL.GraphQL;
 
 public class Mutation
 {
 	[UseDbContext(typeof(DataContext))]
-	public async Task<AddPlatformPayload> CreatePlatformAsync(AddPlatformInput input, [ScopedService] DataContext context)
+	public async Task<AddPlatformPayload> CreatePlatformAsync(
+		AddPlatformInput input,
+		[ScopedService] DataContext context,
+		[Service] ITopicEventSender eventSender,
+		CancellationToken cancellationToken
+	)
 	{
 		var newPlatform = new Data.Entities.Platform
 		{
@@ -15,7 +21,8 @@ public class Mutation
 		};
 		
 		context.Platforms.Add(newPlatform);
-		await context.SaveChangesAsync();
+		await context.SaveChangesAsync(cancellationToken);
+		await eventSender.SendAsync(nameof(Subscription.OnPlatformAdded), newPlatform, cancellationToken);
 		return new AddPlatformPayload(newPlatform);
 	}
 

@@ -14,14 +14,17 @@ builder.Services.AddPooledDbContextFactory<DataContext>(opt => opt
 builder.Services.AddGraphQLServer()
 	.AddQueryType<Query>()
 	.AddMutationType<Mutation>()
+	.AddSubscriptionType<Subscription>()
 	.AddType<PlatformType>()
 	.AddType<CommandType>()
 	.AddFiltering()
 	.AddSorting()
-	.AddProjections();
+	.AddProjections()
+	.AddInMemorySubscriptions();
 
 var app = builder.Build();
 
+app.UseWebSockets();
 app.MapGraphQL();
 app.UseGraphQLVoyager(new VoyagerOptions
 {
