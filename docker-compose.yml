@@ -6,6 +6,7 @@ services:
     ports:
       - "5432:5432"
     environment:
+      - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     restart: unless-stopped
@@ -13,7 +14,7 @@ services:
     container_name: commandergql_service
     depends_on:
       - postgresql
-    build: .
+    build: CommanderGQL/
     ports:
       - "8080:80"
     environment:
